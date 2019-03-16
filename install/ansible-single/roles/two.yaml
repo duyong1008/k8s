@@ -1,0 +1,8 @@
+---
+- hosts: k8s-all
+  roles:
+  - { role: docker_kubeadm }
+  - { role: k8s13x, when: k8s_version.startswith('1.13.')}
+  - { role: flannel }
+  - { role: addnode }
+
