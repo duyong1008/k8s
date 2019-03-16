@@ -56,7 +56,7 @@
   shell: mkdir -p $HOME/.kube  && sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config  &&  sudo chown $(id -u):$(id -g) $HOME/.kube/config
   when:  order  is defined 
 
-- name: 设置master运行容器
-  shell:  kubectl taint nodes --all node-role.kubernetes.io/master-
-  when: ( order  is defined ) and  ( order == 1 )
+#- name: 设置master运行容器
+#  shell:  kubectl taint nodes --all node-role.kubernetes.io/master-
+#  when: ( order  is defined ) and  ( order == 1 )
 

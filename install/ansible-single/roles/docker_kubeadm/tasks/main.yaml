@@ -2,6 +2,9 @@
 - name: 配置docker源
   shell: yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
+- name: 更新yum源
+  shell: yum -y repolist
+
 - name: 安装docker18.06
   yum: name={{item}} state=present
   with_items:
@@ -11,7 +14,7 @@
 
 
 - name: 修改配置文件/usr/lib/systemd/system/docker.service
-  lineinfile: dest=/usr/lib/systemd/system/docker.service  regexp='^ExecStart=' line='ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock  --registry-mirror=https://ms3cfraz.mirror.aliyuncs.com\nEnvironment="HTTPS_PROXY=http://192.168.1.3:8123" "NO_PROXY=localhost,127.0.0.0/8,172.17.0.0/16"'
+  lineinfile: dest=/usr/lib/systemd/system/docker.service  regexp='^ExecStart=' line='ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock  --registry-mirror=https://ms3cfraz.mirror.aliyuncs.com'
 
 - name:  设置docker自启动
   service: name=docker state=started enabled=yes  daemon_reload=yes
